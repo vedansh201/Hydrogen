@@ -138,6 +138,7 @@ export const elements = raw
     };
   });
 
+  
 export const categories = {
   alkali: "Alkali metals",
   alkaline: "Alkaline earth metals",
