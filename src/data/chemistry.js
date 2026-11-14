@@ -138,15 +138,16 @@ export const reactions = {
     text: "Many properties of these short-lived superheavy elements remain uncertain. The scanning line represents ongoing research; it is not a measured property.",
   },
 };
+const imageBase = import.meta.env.BASE_URL;
 
 export const characterImages = {
-  walter: "/images/walter.jpg",
-  jesse: "/images/jesse.jpg",
-  gus: "/images/gus.jpg",
-  saul: "/images/saul.jpg",
-  mike: "/images/mike.jpg",
-  hank: "/images/hank.jpg",
-  skyler: "/images/skyler.jpg",
+  walter: `${imageBase}images/walter.jpg`,
+  jesse: `${imageBase}images/jesse.jpg`,
+  gus: `${imageBase}images/gus.jpg`,
+  saul: `${imageBase}images/saul.jpg`,
+  mike: `${imageBase}images/mike.jpg`,
+  hank: `${imageBase}images/hank.jpg`,
+  skyler: `${imageBase}images/skyler.jpg`,
 };
 
 export const familyTitles = {
