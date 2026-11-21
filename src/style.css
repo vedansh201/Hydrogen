@@ -1103,3 +1103,237 @@ main {padding-bottom: 32px;}
     font-size: 25px;
   }
 }
+
+.header {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);}
+
+.header-search {
+  grid-column: 3;
+  justify-self: end;
+
+  width: min(100%, 320px);
+  min-width: 0;
+}
+
+@media (max-width: 850px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    row-gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+  }
+
+  .header-search {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
+@font-face {
+  font-family: "Heart Breaking Bad";
+  src: url("./assets/fonts/heart-breaking-bad.otf")
+    format("opentype");
+
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero h1 {
+  font-family: "Heart Breaking Bad", serif;
+  font-size: clamp(38px, 6vw, 82px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.hero h1 em {font-style: normal;}
+
+.element-detail {
+  padding: 28px 30px;
+  background: rgba(10, 18, 12, 0.82);
+}
+
+.detail-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.detail-heading {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.element-mark {
+  position: relative;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 92px;
+  height: 92px;
+
+  border: 1px solid #697d55;
+  color: var(--family, #c2d785);
+}
+
+.element-mark span {
+  position: absolute;
+  top: 7px;
+  left: 9px;
+
+  font-size: 11px;
+  line-height: 1;
+}
+
+.element-mark strong {font: 500 48px/1 "Barlow Condensed", sans-serif;}
+
+.detail-character {
+  margin: 0 0 5px;
+
+  color: #b6c395;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.detail-title h2 {
+  margin: 0;
+
+  color: #eef1e2;
+  font: 500 40px/1.1 "Barlow Condensed", sans-serif;
+}
+
+.detail-category {
+  margin: 6px 0 0;
+
+  color: #b5beab;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.detail-description {
+  max-width: 65ch;
+  margin: 22px 0;
+
+  color: #d1d7c8;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.detail-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+
+  margin: 0;
+  padding: 18px 0;
+
+  border-top: 1px solid #42503a;
+  border-bottom: 1px solid #42503a;
+}
+
+.detail-facts dt {
+  margin-bottom: 7px;
+
+  color: #b1bca5;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.detail-facts dd {
+  margin: 0;
+
+  color: #eef1e2;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.detail-uses {margin-top: 20px;}
+
+.detail-uses h3 {
+  margin: 0 0 6px;
+
+  color: #e0e6d3;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detail-uses p {
+  max-width: 65ch;
+  margin: 0;
+
+  color: #c2ccb6;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.detail-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 22px;
+
+  margin-top: 26px;
+}
+
+.detail-navigation button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 0;
+
+  color: #d5dfbf;
+  font-size: 12px;
+}
+
+.detail-navigation button:hover {color: #ffffff;}
+
+.detail-navigation > span {
+  color: #a5b294;
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .element-detail {padding: 22px 18px;}
+
+  .detail-heading {gap: 16px;}
+
+  .element-mark {
+    width: 74px;
+    height: 74px;
+  }
+
+  .element-mark strong {font-size: 40px;}
+
+  .detail-title h2 {font-size: 34px;}
+
+  .detail-description {font-size: 13px;}
+
+  .detail-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+  }
+
+  .detail-navigation {
+    justify-content: space-between;
+    gap: 12px;
+  }
+}
+
+.cast-strip button.active::after {display: none;}
+
+.filters button,
+.filters button.active {border-bottom: 0;}
+.element,
+.element.selected,
+.placeholder {
+  border-color: transparent;
+  box-shadow: none;
+  text-shadow: none;
+}

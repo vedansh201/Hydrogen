@@ -133,6 +133,28 @@ export default function App() {
         <span className="header-note">
           Chemistry, B****
         </span>
+
+        <label className="search header-search">
+          <Search size={17} />
+
+          <input
+            type="search"
+            placeholder="Name, symbol, atomic number…"
+            aria-label="Search elements"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              aria-label="Clear search"
+            >
+              <X size={16} />
+            </button>
+          )}
+        </label>
       </header>
 
       <main>
@@ -156,146 +178,114 @@ export default function App() {
               Learn Elements Breaking Bad Style(don't endup like HIM.)
             </p>
 
-            <a
-              href="#periodic-table"
-              className="explore-link"
-            >
-              Find your element
-              <ArrowDown size={16} />
-            </a>
+            
           </div>
 
-          <div className="hero-stamp">
-            <FlaskConical size={23} />
-
-            <span>
-              HANDLE WITH
-              <br />
-              <b>CURIOSITY</b>
-            </span>
-
-            <small>EST. 2008 / ABQ</small>
-          </div>
         </section>
 
         <section
           id="element-dossier"
-          className="lab"
-          aria-label="Selected element dossier"
+          className="element-detail"
+          aria-label="Selected element information"
         >
-        
-          <div className="dossier">
-
-            <div className="specimen">
-              <div className="specimen-top">
-                <span>
-                  NO. {String(selected.number).padStart(3, "0")}
-                </span>
-
-                <span>{selected.mass}</span>
-              </div>
-
-              <div className="specimen-symbol">
-                {selected.symbol}
-              </div>
-
-              <div className="specimen-bottom">
-                <strong>{selected.name}</strong>
-
-                <span>
-                  {categories[selected.category]}
-                </span>
-              </div>
-
-              <span className="specimen-cross top">
-                +
-              </span>
-
-
-
-              <span className="specimen-cross bottom">
-                +
-              </span>
-            </div>
-
+          <div className="detail-content">
             <div
-              className="element-info"
+              className="detail-heading"
               aria-live="polite"
               aria-atomic="true"
             >
-              <div className="eyebrow">
-                PERIOD {period} / {person.name.toUpperCase()}
+              <div
+                className={`element-mark ${selected.category}`}
+                aria-hidden="true"
+              >
+                <span>{selected.number}</span>
+                <strong>{selected.symbol}</strong>
               </div>
 
-              <h2>{familyTitles[selected.category]}</h2>
-
-              <p>{description}</p>
-
-              <dl className="properties">
-                <div>
-                  <dt>Atomic number</dt>
-                  <dd>{selected.number}</dd>
-                </div>
-
-                <div>
-                  <dt>
-                    {selected.mass.startsWith("[")
-                      ? "Isotope mass no."
-                      : "Atomic weight"}
-                  </dt>
-
-                  <dd>{selected.mass}</dd>
-                </div>
-
-                <div>
-                  <dt>Period / group</dt>
-
-                  <dd>
-                    {period} /{" "}
-                    {selected.row > 7 ? "f-block" : selected.col}
-                  </dd>
-                </div>
-              </dl>
-
-              {selected.uses && (
-                <p className="uses">
-                  <span>IN THE REAL WORLD</span>
-                  {selected.uses}
+              <div className="detail-title">
+                <p className="detail-character">
+                  {person.name} · Period {period}
                 </p>
-              )}
+
+                <h2>{selected.name}</h2>
+
+                <p className="detail-category">
+                  {categories[selected.category]}
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="lab-bottom">
-            <span>
-              Cartel style periodic table.
-            </span>
+            <p className="detail-description">
+              {selected.description ||
+                (selected.category === "unknown"
+                  ? `Many properties of ${selected.name} remain uncertain. It is element ${selected.number} in period ${period}.`
+                  : `${selected.name} (${selected.symbol}) is element ${selected.number} in period ${period}. Its classification is ${categories[selected.category].toLowerCase()}.`)}
+            </p>
 
-            <div>
+            <dl className="detail-facts">
+              <div>
+                <dt>Atomic number</dt>
+                <dd>{selected.number}</dd>
+              </div>
+
+              <div>
+                <dt>
+                  {selected.mass.startsWith("[")
+                  ? "Isotope mass number"
+                  : "Atomic weight"}
+                </dt>
+                <dd>{selected.mass}</dd>
+              </div>
+
+              <div>
+                <dt>Period</dt>
+                <dd>{period}</dd>
+              </div>
+
+              <div>
+                <dt>Group</dt>
+                <dd>
+                  {selected.row > 7 ? "f-block" : selected.col}
+                </dd>
+              </div>
+            </dl>
+
+            {selected.uses && (
+              <div className="detail-uses">
+                <h3>Uses</h3>
+                <p>{selected.uses}</p>
+              </div>
+            )}
+
+            <nav
+              className="detail-navigation"
+              aria-label="Browse elements"
+            >
               <button
                 type="button"
-                aria-label="Previous element"
                 onClick={() => move(-1)}
+                aria-label="Previous element"
               >
                 <ArrowLeft size={16} />
+                Previous
               </button>
 
               <span>
-                {selected.symbol} / {selected.number} OF{" "}
-                {elements.length}
+                {selected.number} of {elements.length}
               </span>
 
               <button
                 type="button"
-                aria-label="Next element"
                 onClick={() => move(1)}
+                aria-label="Next element"
               >
+                Next
                 <ArrowRight size={16} />
               </button>
-            </div>
+            </nav>
           </div>
         </section>
-
+          
         <section
           className="explorer"
           id="periodic-table"
@@ -312,27 +302,6 @@ export default function App() {
               </h2>
             </div>
 
-            <label className="search">
-              <Search size={17} />
-
-              <input
-                type="search"
-                placeholder="Name, symbol, atomic number…"
-                aria-label="Search elements"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-              />
-
-              {query && (
-                <button
-                  type="button"
-                  onClick={() => setQuery("")}
-                  aria-label="Clear search"
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </label>
           </div>
 
           <div
